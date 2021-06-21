@@ -19,10 +19,11 @@ def authenticate(username, password):
     db = Connection()
 
     db.cur.execute(
-        f"SELECT username FROM users WHERE username='{username}' AND password='{hash}'")
+        "SELECT username FROM users WHERE username='%s' AND password='%s'" % username, password)
     result = db.cur.fetchall()
 
     return ' '.join(sum(result, ()))
+
 
 def login():
     print("Welcome to our login page!")
